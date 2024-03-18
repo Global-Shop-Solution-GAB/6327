@@ -1,0 +1,29 @@
+﻿Program.Sub.Preflight.Start
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+Function.Intrinsic.UI.UsePixels ' Allows you to use Pixels instead of Twips throughout
+F.Intrinsic.Control.Try
+	'Rename External ID label (Purchasing > File > Vendor > Open) 
+	F.Intrinsic.Control.If(V.Caller.Hook, =, 14501)
+		'000002 = LBL-EXTERNAL-ID
+		V.Passed.000090.Set("Net Pay Days")
+		'F.Intrinsic.Control.End
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+F.Intrinsic.Control.EndTry	
+Program.Sub.Main.End
+
+Program.Sub.ErrorMsg.Start
+v.Local.sError.Declare
+
+'Generic Error message.
+f.Intrinsic.String.Build("Project GCG_6327_UpdatePOFromNCMR.g2u {0}{0}Subroutine: {1}{0}Error: {2} with Description: {3}", v.Ambient.NewLine, v.Args.CurrentSub, v.Ambient.ErrorNumber, v.Ambient.ErrorDescription, v.Local.sError)
+f.Intrinsic.UI.Msgbox(v.Local.sError)
+Program.Sub.ErrorMsg.End
+
+Program.Sub.Comments.Start
+${$5$}$3.0.0.0$}$1
+${$6$}$bmedina$}$20210601154847834$}$kOipCrsyLBVj2KoSwkcdK23ChxGVcBlE4r/bykvurQZG9SvmqhhPRwSJSCKOAUoZHMYqpFpDy7Q=
+Program.Sub.Comments.End
